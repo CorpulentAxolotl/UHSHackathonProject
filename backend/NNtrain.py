@@ -29,7 +29,7 @@ class NeuralNetwork(nn.Module): # Neural Network is subclassed nn.Module
             nn.Linear(512, 10)
         )
  
-# forward feed the data
+    # forward feed the data
     def forward(self, x): ## only forward is called when model(x) because of nn.Module's overriding and inheritance structure
         x = self.flatten(x) # variable local to forward method; x is input data called later on during NN implementation
         logits = self.linear_relu_stack(x)
@@ -111,7 +111,7 @@ def batch_accuracy(y, Y,): #accuracy_list
     
     return accuracy
 
-if __name__ == "__main__":
+if __name__ == "__baseNN__":
 
     train_data = datasets.FashionMNIST(
         root = "data",
@@ -137,5 +137,4 @@ if __name__ == "__main__":
     num_epochs = int(input(("Epochs: ")))
 
     trained_model = train_loop(my_model, my_loss_fn, my_optimizer, train_data, num_epochs) # idk if this is right
-    
-    test_loop(trained_model, my_loss_fn)
+    torch.save(trained_model.state_dict(), "model.pth")
